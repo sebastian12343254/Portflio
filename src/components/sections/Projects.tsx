@@ -1,6 +1,6 @@
 "use client";
 import { motion, AnimatePresence } from "framer-motion";
-import { ExternalLink, Gamepad2, Globe, MonitorSmartphone, Code2 } from "lucide-react";
+import { ExternalLink, Gamepad2, Globe, MonitorSmartphone, Code2, Lock } from "lucide-react";
 import { useLanguage } from "@/components/LanguageProvider";
 import { useState } from "react";
 
@@ -20,7 +20,7 @@ const TechIcon = ({ name }: { name: string }) => {
     TypeScript: <svg viewBox="0 0 24 24" fill="none" stroke="#3b82f6" strokeWidth="2" className="w-5 h-5"><path d="M4 4h16v16H4z"/><path d="M9 10v6M7 10h4M14 16c-1.5 0-2-.5-2-1.5v-1c0-1 .5-1.5 2-1.5s2-.5 2-1.5v-1c0-1-.5-1.5-2-1.5"/></svg>,
     Java: <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5 text-[#ED8B00]"><path d="M14.5 4h-9V2h9v2zM15 6H3v8.5C3 17.5 5.5 20 8.5 20h1c3 0 5.5-2.5 5.5-5.5V6zm2 0h-1v6h1c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-1 4h1V8h-1v2zM5.2 22h7.6v2H5.2z"/></svg>,
   };
-  return icons[name] || <span className="text-[10px] font-bold px-2 py-1 rounded bg-zinc-800 border border-zinc-700 text-zinc-300">{name}</span>;
+  return icons[name] || <span className="text-[10px] font-bold px-2 py-1 rounded bg-zinc-800 border border-zinc-700 text-zinc-300 whitespace-nowrap">{name}</span>;
 };
 
 type Category = "all" | "web" | "games" | "tools";
@@ -28,6 +28,32 @@ type Category = "all" | "web" | "games" | "tools";
 const projectsData = [
   {
     id: 1, 
+    title: "Punto de venta en la nube",
+    category: "web" as Category,
+    desc: {
+      ES: "Sistema Full Stack de inventario y punto de venta. Arquitectura en la nube (Vercel/Render) con dashboard dinámico, exportación a Excel y API protegida con Spring Security. Usuario: admin, Contraseña: admin123",
+      EN: "Full Stack cloud inventory and POS system. Features microservices architecture, dynamic dashboard, Excel bulk data import, and API secured with Spring Security. User: admin, Password: admin123"
+    },
+    img: "./inventario.png", 
+    tech: ["React", "Tailwind", "Java", "Spring Boot", "PostgreSQL"], 
+    link: "https://inventario-4c6on8kcr-sebastian12343254s-projects.vercel.app/", 
+    github: "https://github.com/sebastian12343254/Inventario-app"
+  },
+  {
+    id: 2, 
+    title: "Sitio administrativo y pagina web para escuela",
+    category: "web" as Category,
+    desc: {
+      ES: "Plataforma web integral desarrollada para una institución educativa. Cuenta con un portal público optimizado para SEO y un sistema interno de gestión académica respaldado por una API robusta en Java.",
+      EN: "Comprehensive web platform developed for an educational institution. Features an SEO-optimized public portal and an internal academic management system backed by a robust Java API."
+    },
+    img: "./escuela.png", 
+    tech: ["NextJS", "Tailwind", "Java", "Spring Boot", "MySQL"], 
+    link: "", 
+    github: "" 
+  },
+  {
+    id: 3, 
     title: "Mario Whac-A-Mole",
     category: "games" as Category,
     desc: {
@@ -40,7 +66,7 @@ const projectsData = [
     github: "https://github.com/sebastian12343254/MarioGame"
   },
   {
-    id: 2, 
+    id: 4, 
     title: "Classic Snake Game",
     category: "games" as Category,
     desc: {
@@ -53,7 +79,7 @@ const projectsData = [
     github: "https://github.com/sebastian12343254/SnakeGame"
   },
   {
-    id: 3, 
+    id: 5, 
     title: "Pac-Man Classic",
     category: "games" as Category,
     desc: {
@@ -66,7 +92,7 @@ const projectsData = [
     github: "https://github.com/sebastian12343254/PacMan"
   },
   {
-    id: 4, 
+    id: 6, 
     title: "Java Modern Calculator",
     category: "tools" as Category,
     desc: {
@@ -79,7 +105,7 @@ const projectsData = [
     github: "https://github.com/sebastian12343254/Calculator"
   },
   {
-    id: 5, 
+    id: 7, 
     title: "Algorithmic Challenges UI",
     category: "tools" as Category,
     desc: {
@@ -90,6 +116,19 @@ const projectsData = [
     tech: ["Java", "Maven", "JUnit", "Java Swing"], 
     link: "https://github.com/sebastian12343254/VariosProblemas",
     github: "https://github.com/sebastian12343254/VariosProblemas"
+  },
+  {
+    id: 8,
+    title: "Colección de Sitios Web Estáticos",
+    category: "web" as Category,
+    desc: {
+      ES: "Desarrollo de múltiples landing pages y sitios web estáticos para clientes privados. Proyectos enfocados en diseño responsivo, accesibilidad, optimización SEO y alto rendimiento (Lighthouse). Por acuerdos de confidencialidad, los enlaces y el código fuente no son públicos.",
+      EN: "Development of multiple landing pages and static websites for private clients. Projects focused on responsive design, accessibility, SEO optimization, and high performance (Lighthouse). Due to NDAs, links and source code are not public."
+    },
+    img: "./estatico.png",
+    tech: ["HTML", "CSS", "JavaScript", "React", "Tailwind"], 
+    link: "", 
+    github: ""
   }
 ];
 
@@ -101,14 +140,16 @@ export default function Projects() {
     ES: { 
       title: "Proyectos", 
       subtitle: "Explora mi trabajo real y aplicaciones desarrolladas.", 
-      view: "Repositorio",
+      view: "Visitar Proyecto",
+      private: "Privado",
       tabs: { all: "Todos", web: "Web Dev", games: "Videojuegos", tools: "Herramientas & Algoritmos" }
     },
     EN: { 
       title: "Projects", 
       subtitle: "Explore my real-world work and developed applications.", 
-      view: "Repository",
-      tabs: { all: "All", web: "Web Dev", games: "Videojuegos", tools: "Tools & Algorithms" }
+      view: "View Project",
+      private: "Private",
+      tabs: { all: "All", web: "Web Dev", games: "Video Games", tools: "Tools & Algorithms" }
     }
   };
 
@@ -191,18 +232,30 @@ export default function Projects() {
                     className="max-w-full max-h-full object-contain opacity-90 group-hover:scale-105 transition-transform duration-700"
                   />
                   <div className="absolute inset-0 bg-blue-900/40 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity duration-300 backdrop-blur-[2px]">
-                    <a href={project.link} target="_blank" rel="noopener noreferrer" className="px-6 py-2 bg-white text-blue-900 rounded-full font-bold text-xs tracking-wider flex items-center gap-2 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300 shadow-xl">
-                      {t.view} <ExternalLink size={14} />
-                    </a>
+                    {project.link ? (
+                      <a href={project.link} target="_blank" rel="noopener noreferrer" className="px-6 py-2 bg-white text-blue-900 rounded-full font-bold text-xs tracking-wider flex items-center gap-2 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300 shadow-xl">
+                        {t.view} <ExternalLink size={14} />
+                      </a>
+                    ) : (
+                      <span className="px-6 py-2 bg-zinc-800/80 text-zinc-300 border border-zinc-600/50 rounded-full font-bold text-xs tracking-wider flex items-center gap-2 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300 cursor-not-allowed shadow-xl">
+                        {t.private} <Lock size={14} />
+                      </span>
+                    )}
                   </div>
                 </div>
 
                 <div className="p-6 flex flex-col grow">
                   <div className="flex justify-between items-start mb-3">
                     <h3 className="text-xl font-bold text-zinc-900 dark:text-white tracking-tight">{project.title}</h3>
-                    <a href={project.github} target="_blank" rel="noopener noreferrer" className="text-zinc-400 hover:text-blue-500 transition-colors">
-                      <GithubIcon size={18} />
-                    </a>
+                    {project.github ? (
+                      <a href={project.github} target="_blank" rel="noopener noreferrer" className="text-zinc-400 hover:text-blue-500 transition-colors">
+                        <GithubIcon size={18} />
+                      </a>
+                    ) : (
+                      <div className="text-zinc-500/50 flex items-center" title={t.private}>
+                        <Lock size={18} />
+                      </div>
+                    )}
                   </div>
                   
                   <p className="text-zinc-600 dark:text-zinc-400 text-sm leading-relaxed mb-6 grow">
